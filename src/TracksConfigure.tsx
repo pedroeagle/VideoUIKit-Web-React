@@ -24,6 +24,7 @@ const TracksConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> =
   const mediaStore = useRef<mediaStore>({})
 
   useEffect(() => {
+    console.log(localAudioTrack)
     if (tracks !== null) {
       setLocalAudioTrack(tracks[0])
       setLocalVideoTrack(tracks[1])
@@ -50,7 +51,7 @@ const TracksConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> =
     <TracksProvider
       value={{
         localVideoTrack: localVideoTrack,
-        localAudioTrack: localAudioTrack
+        // localAudioTrack: localAudioTrack
       }}
     >
       {ready ? props.children : null}

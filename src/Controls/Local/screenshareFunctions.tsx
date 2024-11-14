@@ -114,6 +114,6 @@ const startScreenshare = async (
   if (returnedUid) console.log(returnedUid)
 }
 
-let stopScreenshare = () => {}
+let stopScreenshare = () => { }
 
 export { startScreenshare, stopScreenshare }

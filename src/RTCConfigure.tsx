@@ -42,7 +42,7 @@ const RtcConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (
   const internalAudioTrack = useRef<ILocalAudioTrack>()
   const isScreensharingRef = useRef<boolean>(false)
   const { localVideoTrack, localAudioTrack } = useContext(TracksContext)
-  const { callbacks, rtcProps, rtmProps } = useContext(PropsContext)
+  const { callbacks, rtcProps } = useContext(PropsContext)
   const [ready, setReady] = useState<boolean>(false)
   const [channelJoined, setChannelJoined] = useState<boolean>(false)
   let joinRes: ((arg0: boolean) => void) | null = null // Resolve for canJoin -> to set canJoin to true
@@ -104,6 +104,9 @@ const RtcConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (
           // Get current peer IDs
           const [remoteUser, mediaType] = args
           console.log('user-published', remoteUser.uid)
+          console.log(remoteUser)
+          console.log(isScreensharingRef)
+          console.log(props)
           if (
             (remoteUser.uid === props.screenshareUid &&
               isScreensharingRef.current) ||
@@ -434,8 +437,6 @@ const RtcConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (
       screenTrack.current = screenVideoTrack?.[0]
       internalAudioTrack.current = screenVideoTrack?.[1]
       const uid = rtcProps.screenshareUid || 1 // 1 is default
-      console.log('###AQUI###')
-      console.log({ rtmProps, uid })
       mediaStore.current[uid] = {
         videoTrack: screenTrack.current,
         audioTrack: internalAudioTrack.current
