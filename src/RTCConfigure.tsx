@@ -42,7 +42,7 @@ const RtcConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (
   const internalAudioTrack = useRef<ILocalAudioTrack>()
   const isScreensharingRef = useRef<boolean>(false)
   const { localVideoTrack, localAudioTrack } = useContext(TracksContext)
-  const { callbacks, rtcProps } = useContext(PropsContext)
+  const { callbacks, rtcProps, rtmProps } = useContext(PropsContext)
   const [ready, setReady] = useState<boolean>(false)
   const [channelJoined, setChannelJoined] = useState<boolean>(false)
   let joinRes: ((arg0: boolean) => void) | null = null // Resolve for canJoin -> to set canJoin to true
@@ -184,11 +184,11 @@ const RtcConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (
             console.log('token will expire')
             const res = await fetch(
               tokenUrl +
-                '/rtc/' +
-                channel +
-                '/publisher/uid/' +
-                (uid || 0) +
-                '/'
+              '/rtc/' +
+              channel +
+              '/publisher/uid/' +
+              (uid || 0) +
+              '/'
             )
             const data = await res.json()
             const token = data.rtcToken
@@ -198,11 +198,11 @@ const RtcConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (
           client.on('token-privilege-did-expire', async () => {
             const res = await fetch(
               tokenUrl +
-                '/rtc/' +
-                channel +
-                '/publisher/uid/' +
-                (uid || 0) +
-                '/'
+              '/rtc/' +
+              channel +
+              '/publisher/uid/' +
+              (uid || 0) +
+              '/'
             )
             const data = await res.json()
             const token = data.rtcToken
@@ -219,14 +219,14 @@ const RtcConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (
             try {
               client.on(e, (...args: any[]) => {
                 // eslint-disable-next-line prefer-spread
-                ;(callbacks[e] as Function).apply(null, args)
+                ; (callbacks[e] as Function).apply(null, args)
               })
             } catch (e) {
               console.log(e)
             }
           })
         }
-        ;(joinRes as (arg0: boolean) => void)(true)
+        ; (joinRes as (arg0: boolean) => void)(true)
         setReady(true)
       } catch (e) {
         console.log('!!!', e)
@@ -242,7 +242,7 @@ const RtcConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (
           console.log(e)
         }
       }
-    } else return () => {}
+    } else return () => { }
   }, [rtcProps.appId]) //, ready])
 
   // Dynamically switches channel when channel prop changes
@@ -261,11 +261,11 @@ const RtcConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (
           try {
             const res = await fetch(
               tokenUrl +
-                '/rtc/' +
-                channel +
-                '/publisher/uid/' +
-                (userUid || 0) +
-                '/'
+              '/rtc/' +
+              channel +
+              '/publisher/uid/' +
+              (userUid || 0) +
+              '/'
             )
             const data = await res.json()
             const token = data.rtcToken
@@ -434,6 +434,8 @@ const RtcConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (
       screenTrack.current = screenVideoTrack?.[0]
       internalAudioTrack.current = screenVideoTrack?.[1]
       const uid = rtcProps.screenshareUid || 1 // 1 is default
+      console.log('###AQUI###')
+      console.log({ rtmProps, uid })
       mediaStore.current[uid] = {
         videoTrack: screenTrack.current,
         audioTrack: internalAudioTrack.current
