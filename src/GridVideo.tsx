@@ -23,6 +23,10 @@ const GridVideo: React.FC = () => {
   const unit = 'minmax(0, 1fr) '
 
   useEffect(() => {
+    console.log({ users, rtcProps })
+  }, [users, rtcProps])
+
+  useEffect(() => {
     const handleResize = () => {
       if (parentRef.current) {
         setWidth(parentRef.current.offsetWidth)
