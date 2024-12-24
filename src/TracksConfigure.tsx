@@ -14,7 +14,9 @@ const useTracks = createMicrophoneAndCameraTracks(
 /**
  * React component that create local camera and microphone tracks and assigns them to the child components
  */
-const TracksConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> = (props) => {
+const TracksConfigure: React.FC<
+  PropsWithChildren<Partial<RtcPropsInterface>>
+> = (props) => {
   const [ready, setReady] = useState<boolean>(false)
   const [localVideoTrack, setLocalVideoTrack] =
     useState<ILocalVideoTrack | null>(null)
@@ -51,7 +53,7 @@ const TracksConfigure: React.FC<PropsWithChildren<Partial<RtcPropsInterface>>> =
     <TracksProvider
       value={{
         localVideoTrack: localVideoTrack,
-        // localAudioTrack: localAudioTrack
+        localAudioTrack: localAudioTrack
       }}
     >
       {ready ? props.children : null}
