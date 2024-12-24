@@ -23,8 +23,8 @@ import PopUp from './Controls/Remote/RemoteMutePopUp'
 const AgoraUIKit: React.FC<PropsInterface> = (props) => {
   const { styleProps, rtcProps } = props
   const { UIKitContainer } = styleProps || {}
-  console.log('###UI KIT####')
-  console.log(props)
+  console.info('###UI KIT####')
+  console.info(props)
   return (
     <PropsProvider value={props}>
       <div
