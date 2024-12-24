@@ -1,7 +1,7 @@
 /**
  * @module AgoraUIKit
  */
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import RtcConfigure from './RTCConfigure'
 import PropsContext, {
   PropsProvider,
@@ -46,6 +46,10 @@ const AgoraUIKit: React.FC<PropsInterface> = (props) => {
 
 export const VideocallUI = () => {
   const { rtcProps } = useContext(PropsContext)
+  useEffect(() => {
+    console.log('###VIDEO LOCAL UI###')
+    console.log({ rtcProps })
+  }, [rtcProps])
   return (
     <RtcConfigure callActive={rtcProps.callActive}>
       <LocalUserContext>
