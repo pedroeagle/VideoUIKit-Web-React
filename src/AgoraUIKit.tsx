@@ -23,7 +23,8 @@ import PopUp from './Controls/Remote/RemoteMutePopUp'
 const AgoraUIKit: React.FC<PropsInterface> = (props) => {
   const { styleProps, rtcProps } = props
   const { UIKitContainer } = styleProps || {}
-
+  console.log('###UI KIT####')
+  console.log(props)
   return (
     <PropsProvider value={props}>
       <div
@@ -46,10 +47,6 @@ const AgoraUIKit: React.FC<PropsInterface> = (props) => {
 
 export const VideocallUI = () => {
   const { rtcProps } = useContext(PropsContext)
-  useEffect(() => {
-    console.log('###VIDEO LOCAL UI###')
-    console.log({ rtcProps })
-  }, [rtcProps])
   return (
     <RtcConfigure callActive={rtcProps.callActive}>
       <LocalUserContext>

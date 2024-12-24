@@ -26,6 +26,7 @@ const TracksConfigure: React.FC<
   const mediaStore = useRef<mediaStore>({})
 
   useEffect(() => {
+    console.log('###LOCAL AUDIO TRACK###')
     console.log(localAudioTrack)
     if (tracks !== null) {
       setLocalAudioTrack(tracks[0])
